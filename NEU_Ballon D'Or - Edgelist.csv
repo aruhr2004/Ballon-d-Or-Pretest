@@ -1,0 +1,21 @@
+from,to,relation,rank,weight,year
+Ousmane Dembélé,Paris Saint-Germain,played_at,1,100,bdo2025
+Ousmane Dembélé,Stade Rennes,trained_at,,,
+Lamine Yamal,FC Barcelona,played_at,2,50,bdo2025
+Lamine Yamal,FC Barcelona,trained_at,,,
+Vitinha,Paris Saint-Germain,played_at,3,30,bdo2025
+Vitinha,FC Porto,trained_at,,,
+Mohamed Salah,FC Liverpool,played_at,4,20,bdo2025
+Mohamed Salah,FC Basel,trained_at,,,
+Raphinha,FC Barcelona,played_at,5,10,bdo2025
+Raphinha,Vitória Guimarães SC,trained_at,,,
+Aitana Bonmatí,FC Barcelona,played_at,1,100,bdo2025
+Aitana Bonmatí,FC Barcelona,trained_at,,,
+Mariona Caldentey,FC Arsenal,played_at,2,50,bdo2025
+Mariona Caldentey,FC Barcelona,trained_at,,,
+Alessia Russo,FC Arsenal,played_at,3,30,bdo2025
+Alessia Russo,FC Chelsea,trained_at,,,
+Alexia Putellas,FC Barcelona,played_at,4,20,bdo2025
+Alexia Putellas,Espanyol Barcelona,trained_at,,,
+Chloe Kelly,FC Arsenal,played_at,5,10,bdo2025
+Chloe Kelly,FC Arsenal,trained_at,,,
