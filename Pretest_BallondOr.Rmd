@@ -1,0 +1,112 @@
+---
+title: "Pretest_BallondOr"
+author: "Amelie Ruhr"
+date: "2026-01-16"
+output: html_document
+---
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+
+```{r Setup, message=FALSE, warning=FALSE, paged.print=FALSE}
+library(tidyverse)
+library(tidygraph)
+library(igraph)
+```
+
+## Netzwerk einlesen
+
+```{r 0 Netzwerk erstellen, message=FALSE, warning=FALSE, paged.print=TRUE}
+library(tidygraph)
+
+# Einlesen der Edge- und Nodelist
+
+# Link zu github: https://github.com/aruhr2004/Ballon-d-Or-Pretest
+
+el <- read.csv("https://raw.githubusercontent.com/aruhr2004/Ballon-d-Or-Pretest/refs/heads/main/NEU_Ballon%20D'Or%20-%20Edgelist.csv", header=T, as.is=T, sep = ",")
+
+nl <- read.csv("https://raw.githubusercontent.com/aruhr2004/Ballon-d-Or-Pretest/refs/heads/main/NEU_Ballon%20D'Or%20-%20Nodelist.csv", header=T, as.is=T, sep = ",")
+
+# Matrix erstellen
+edgematrix <-as.matrix(el)
+
+# Zusammenführen von Edge- und Nodelist als igraph-Objekt bd
+bd <- graph_from_data_frame(d=edgematrix, vertices=nl, directed=T)
+
+# Wandelt igraph in tibble um
+bd <- as_tbl_graph(bd)
+
+# definiert für alle Abbildungen, dass die Pfeilspitzen klein sind
+E(bd)$arrow.size <- .2
+
+# Aufrufen der Netzwerks bd (bd für ballon d'or)
+bd
+
+# Edge- und Vertex-Attribute in der Übersicht
+# list.vertex.attributes(bd)
+# list.edge.attributes(bd)
+
+```
+
+```{r 4 Viusalisierung, fig.height=6, fig.width=9, message=FALSE, warning=FALSE, paged.print=FALSE}
+
+# Visualisierung 
+
+plot(bd,
+  asp=0,
+  layout=layout_nicely,
+  vertex.size=degree(bd)/1.5,
+  main="Ballon d'Or 2025 Pretest"
+  )
+```
+
+```{r  Übung Vertex Attribut}
+
+
+library(tidygraph)
+library(ggraph)
+library(tidyverse)
+
+
+bd %>%
+activate(edges) %>% 
+as_tibble() %>% 
+count(relation)
+
+bd_trainedat <- bd%>%
+  activate(edges) %>%
+  filter(relation == "trained_at")
+
+
+# Plotten mit Base R (alternativ später mit ggraph schöner)
+plot(bd_trainedat,
+     asp = 0,
+     layout = layout_nicely,
+     vertex.size = degree(bd_trainedat) / 1.5,
+     main = "Ballon d'Or 2025 – Trained At"
+)
+
+```
+```{r  Übung Vertex Attribut}
+
+
+library(tidygraph)
+library(ggraph)
+library(tidyverse)
+
+
+bd_spain <- bd %>%
+  activate(nodes) %>%
+  filter(nationality == "ES")
+
+plot(bd_spain,
+     asp = 0,
+     layout = layout_nicely,
+     vertex.size = degree(bd_spain) / 1.5,
+     main = "Ballon d'Or 2025 – Spanien"
+)
+
+```
